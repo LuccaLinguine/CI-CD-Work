@@ -24,3 +24,6 @@ class TestGenerateJson(unittest.TestCase):
     # Check rows
     def test_rows(self):
         self.assertGreaterEqual(len(self.json_data), 900, "JSON data has less than 900 rows")
+
+if __name__ == "__main__":
+    unittest.main()
