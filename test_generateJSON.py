@@ -13,7 +13,7 @@ class TestGenerateJson(unittest.TestCase):
             self.expected_keys = next(reader) # Get only CSV header
 
         # Load JSON file
-        with open("profiles1.json", "r", encoding="utf-8") as f:
+        with open("data.json", "r", encoding="utf-8") as f:
             self.json_data = json.load(f)
 
     # Check headers
@@ -24,3 +24,6 @@ class TestGenerateJson(unittest.TestCase):
     # Check rows
     def test_rows(self):
         self.assertGreaterEqual(len(self.json_data), 900, "JSON data has less than 900 rows")
+
+if __name__ == "__main__":
+    unittest.main()
