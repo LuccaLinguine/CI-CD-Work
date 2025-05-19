@@ -1,32 +1,55 @@
-name: CICD
+name: CICD vg-krav
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "vg-krav" ]
 permissions:
   id-token: write
   pages: write
   contents: read
   
 jobs:
+
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest    
+    
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:    
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!      
+      - uses: actions/checkout@v3  
 
-        
-      # lägg till create csv file (glöm inte pip install)
-      # lägg till Create JSON file
-      # Köra enhetstester     
-      #python .\calculateTests.py 
+      # Install Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      # Install pip for CSV generator
+      - name: Install Faker
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install faker
+
+      # Generate CSV
+      - name: Generate CSV
+        run: python generate.py
+
+      # Check CSV
+      - name: Check CSV
+        run: python test_generateCSV.py
+
+      # Transform CSV to JSON
+      - name: Transform CSV to JSON
+        run: python csvtojson.py
+
+      # Check JSON
+      - name: Check JSON
+        run: python test_generateJSON.py
+
+      # Deploy to GitHub Pages
       - name: Copy to dist
         run: |
           mkdir dist
