@@ -1,7 +1,7 @@
 import csv, json
 
 csv_file = "profiles1.csv"
-json_file = "profiles1.json"
+json_file = "data.json"
 
 # Read CSV
 with open(csv_file, mode="r", encoding="utf-8") as f:
