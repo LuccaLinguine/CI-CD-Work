@@ -28,6 +28,9 @@ jobs:
       - name: Install dependencies
         run: Dependencies.txt
 
+      - name: Generate JSON from CSV
+        run: python csvtojson.py
+
       - name: Run Unit Tests
         run: pytest
       # Placeholder for: create CSV, create JSON, run unit tests
