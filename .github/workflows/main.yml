@@ -28,6 +28,9 @@ jobs:
       - name: Install dependencies
         run: Dependencies.txt
 
+      - name: Generate CSV profiles
+        run: python generate.py
+
       - name: Generate JSON from CSV
         run: python csvtojson.py
 
